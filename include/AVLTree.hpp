@@ -1,3 +1,6 @@
+#ifndef AVL_TREE_HPP
+#define AVL_TREE_HPP
+
 #include "SelfBalancingBST.hpp"
 
 #include <algorithm>
@@ -56,8 +59,10 @@ private:
 
     if (this->comp(value, node->data))
       node->left = insert(node->left, value);
-    else
+    else if (this->comp(node->data, value))
       node->right = insert(node->right, value);
+    else
+      return node;
 
     return balance(node);
   }
@@ -111,3 +116,5 @@ public:
 
   void remove(const T& value) { this->root = remove(this->root, value); }
 };
+
+#endif

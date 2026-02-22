@@ -1,3 +1,6 @@
+#ifndef AVL_TREE_HPP
+#define AVL_TREE_HPP
+
 #include "SelfBalancingBST.hpp"
 
 #include <algorithm>
@@ -111,3 +114,5 @@ public:
 
   void remove(const T& value) { this->root = remove(this->root, value); }
 };
+
+#endif

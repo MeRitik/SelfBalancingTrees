@@ -10,11 +10,11 @@ class AVLTree : public SelfBalancingBST<T, Compare> {
 private:
   using Node = typename SelfBalancingBST<T, Compare>::Node;
 
-  int balance_factor(Node *node) {
+  int balance_factor(Node* node) {
     return this->height(node->left) - this->height(node->right);
   }
 
-  Node *balance(Node *node) override {
+  Node* balance(Node* node) override {
     if (!node)
       return node;
 
@@ -49,7 +49,7 @@ private:
     return node; // already balanced
   }
 
-  Node *insert(Node *node, const T &value) override {
+  Node* insert(Node* node, const T& value) override {
 
     if (!node)
       return new Node(value);
@@ -62,13 +62,13 @@ private:
     return balance(node);
   }
 
-  Node *find_min(Node *node) {
+  Node* find_min(Node* node) {
     while (node->left)
       node = node->left;
     return node;
   }
 
-  Node *remove(Node *node, const T &value) override {
+  Node* remove(Node* node, const T& value) override {
     if (!node)
       return node;
 
@@ -81,7 +81,7 @@ private:
     else {
       if (!node->left || !node->right) {
 
-        Node *temp = node->left ? node->left : node->right;
+        Node* temp = node->left ? node->left : node->right;
 
         if (!temp) {
           temp = node;
@@ -94,7 +94,7 @@ private:
       }
 
       else {
-        Node *successor = find_min(node->right);
+        Node* successor = find_min(node->right);
         node->data = successor->data;
         node->right = remove(node->right, successor->data);
       }
@@ -105,4 +105,9 @@ private:
 
     return balance(node);
   }
+
+public:
+  void insert(const T& value) { this->root = insert(this->root, value); }
+
+  void remove(const T& value) { this->root = remove(this->root, value); }
 };

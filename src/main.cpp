@@ -1,11 +1,11 @@
-#include "AVLTree.hpp"
+#include "RedBlackTree.hpp"
 #include <iostream>
 using namespace std;
 
 int main() {
 
-  AVLTree<int, less<int>> tree; // greater<int>, less<int>, greater_equal<int>,
-                                // less_equal<int>, etc.
+  RedBlackTree<int> tree; // greater<int>, less<int>, greater_equal<int>,
+                          // less_equal<int>, etc.
 
   int values[] = {10, 20, 30, 40, 50, 25};
 

@@ -2,9 +2,10 @@
 #define SELF_BALANCING_BST_HPP
 
 #include <algorithm>
+#include <functional>
 #include <iostream>
 
-template <typename T, typename Compare = less<T>> class SelfBalancingBST {
+template <typename T, typename Compare = std::less<T>> class SelfBalancingBST {
 protected:
   struct Node {
     T data;
@@ -71,12 +72,12 @@ protected:
     return search(node->right, value);
   }
 
-  void inorder(Node* node) const {
+  void inorder(RedBlackNodenode) const {
     if (!node)
       return;
 
     inorder(node->left);
-    cout << node->data << " ";
+    std::cout << node->data << " ";
     inorder(node->right);
   }
 
@@ -91,7 +92,7 @@ public:
 
   void print_inorder() const {
     inorder(root);
-    cout << endl;
+    std::cout << endl;
   }
 };
 

@@ -185,7 +185,36 @@ private:
     inorder(node->right);
   }
 
+  bool search(RedBlackNode* node, const T& value) const {
+    if (!node) {
+      return false;
+    }
+
+    if (this->comp(value, node->data)) {
+      return search(node->left, value);
+    }
+
+    if (this->comp(node->data, value)) {
+      return search(node->right, value);
+    }
+
+    return true; // Equal
+  }
+
+  void cleanup(RedBlackNode* node) {
+    if (!node) {
+      return;
+
+      cleanup(node->left);
+      cleanup(node->right);
+
+      delete node;
+    }
+  }
+
 public:
+  ~RedBlackTree() { cleanup(root); }
+
   void insert(const T& value) {
     RedBlackNode* inserted_node = bst_insert(root, value);
     fix_insert(inserted_node);
@@ -193,6 +222,8 @@ public:
   }
 
   void print_inorder() { inorder(root); }
+
+  bool search(const T& value) { return search(root, value); }
 };
 
 #endif
